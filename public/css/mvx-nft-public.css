@@ -290,6 +290,8 @@
 	border: 1px solid var(--mvx-border-color);
 	break-inside: avoid;
 	grid-row-end: span 20; /* Default span, recalculated in JS */
+	will-change: transform;
+	transform-style: preserve-3d;
 }
 
 .mvx-nft-card-content {

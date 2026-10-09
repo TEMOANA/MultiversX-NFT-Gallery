@@ -559,7 +559,26 @@ class MvxPinterestGallery {
 				}
 			});
 
+			card.addEventListener('mousemove', (e) => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+				const rotateX = ((y - centerY) / centerY) * -12; // 12 deg max
+				const rotateY = ((x - centerX) / centerX) * 12;
+				
+				card.style.transition = 'none';
+				card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateY(-8px)`;
+				card.style.zIndex = '10'; // Bring to front
+			});
+
 			card.addEventListener('mouseleave', () => {
+				// Reset 3D rotation
+				card.style.transition = '';
+				card.style.transform = '';
+				card.style.zIndex = '';
+
 				const video = card.querySelector('.mvx-nft-hover-video');
 				const thumb = card.querySelector('.mvx-nft-thumb');
 				const playBadge = card.querySelector('.mvx-play-badge');
