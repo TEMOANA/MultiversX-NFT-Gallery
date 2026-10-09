@@ -1,0 +1,1028 @@
+/**
+ * public/css/mvx-nft-public.css
+ * Core styles for the MultiversX NFT Pinterest Gallery.
+ */
+
+:root {
+	--mvx-accent-color: #23F3D2;
+	--mvx-bg-color: #13151A;
+	--mvx-card-bg: rgba(255, 255, 255, 0.05);
+	--mvx-card-radius: 16px;
+	--mvx-text-color: #F3F4F6;
+	--mvx-text-secondary: #9CA3AF;
+	--mvx-border-color: rgba(255, 255, 255, 0.08);
+	--mvx-shadow-color: rgba(0, 0, 0, 0.3);
+	--mvx-modal-bg: rgba(20, 22, 28, 0.95);
+}
+
+/* Container */
+.mvx-nft-container {
+	background-color: var(--mvx-bg-color);
+	padding: 30px;
+	border-radius: calc(var(--mvx-card-radius) + 8px);
+	font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	color: var(--mvx-text-color);
+	box-sizing: border-box;
+	margin: 20px 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.mvx-nft-container * {
+	box-sizing: border-box;
+}
+
+/* Themes Presets */
+.mvx-theme-light {
+	--mvx-bg-color: #F9FAFB;
+	--mvx-card-bg: #FFFFFF;
+	--mvx-text-color: #1F2937;
+	--mvx-text-secondary: #6B7280;
+	--mvx-border-color: #E5E7EB;
+	--mvx-shadow-color: rgba(0, 0, 0, 0.05);
+	--mvx-modal-bg: rgba(255, 255, 255, 0.98);
+}
+
+.mvx-theme-light .mvx-nft-card {
+	box-shadow: 0 10px 15px -3px var(--mvx-shadow-color), 0 4px 6px -2px var(--mvx-shadow-color);
+	border: 1px solid var(--mvx-border-color);
+}
+
+.mvx-theme-light .mvx-nft-card-overlay {
+	background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.mvx-theme-cyberpunk {
+	--mvx-bg-color: #050508;
+	--mvx-card-bg: #0D0E15;
+	--mvx-text-color: #00FFFF;
+	--mvx-text-secondary: #FF00FF;
+	--mvx-border-color: #FF00FF;
+	--mvx-card-radius: 0px;
+	--mvx-accent-color: #39FF14;
+	--mvx-modal-bg: rgba(5, 5, 8, 0.98);
+}
+
+.mvx-theme-cyberpunk .mvx-nft-card {
+	border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.mvx-theme-cyberpunk .mvx-nft-card:hover {
+	border-color: var(--mvx-accent-color);
+	box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+}
+
+.mvx-theme-cyberpunk .mvx-nft-filter-btn.active {
+	box-shadow: 0 0 10px var(--mvx-accent-color);
+}
+
+/* Spinner Loader */
+.mvx-nft-loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 50px 0;
+	text-align: center;
+}
+
+.mvx-spinner {
+	width: 50px;
+	height: 50px;
+	border: 3px solid var(--mvx-border-color);
+	border-top-color: var(--mvx-accent-color);
+	border-radius: 50%;
+	animation: mvx-spin 1s ease-in-out infinite;
+	margin-bottom: 15px;
+}
+
+@keyframes mvx-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Search and Filters Toggle */
+.mvx-nft-toggle-wrapper {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+}
+
+.mvx-btn-toggle-filters {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid var(--mvx-border-color);
+	color: var(--mvx-text-color);
+	padding: 10px 24px;
+	border-radius: 30px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	transition: all 0.3s ease;
+}
+
+.mvx-theme-light .mvx-btn-toggle-filters {
+	background: #FFFFFF;
+	color: #1F2937;
+	border-color: #D1D5DB;
+}
+
+.mvx-btn-toggle-filters:hover {
+	border-color: var(--mvx-accent-color);
+	box-shadow: 0 0 12px rgba(35, 243, 210, 0.3);
+	transform: translateY(-1px);
+}
+
+.mvx-btn-toggle-filters .mvx-toggle-icon {
+	display: inline-block;
+	transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	font-size: 10px;
+}
+
+.mvx-btn-toggle-filters.active .mvx-toggle-icon {
+	transform: rotate(180deg);
+}
+
+/* Search and Filters Panel */
+.mvx-nft-filter-bar {
+	margin-bottom: 30px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid var(--mvx-border-color);
+	padding: 20px;
+	border-radius: var(--mvx-card-radius);
+	backdrop-filter: blur(10px);
+}
+
+.mvx-theme-light .mvx-nft-filter-bar {
+	background: #FFFFFF;
+}
+
+.mvx-nft-filter-row-top {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 15px;
+	flex-wrap: wrap;
+}
+
+.mvx-search-input-wrapper {
+	flex: 1;
+	min-width: 250px;
+	position: relative;
+}
+
+.mvx-search-input-wrapper input {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid var(--mvx-border-color);
+	padding: 12px 20px;
+	border-radius: 30px;
+	color: var(--mvx-text-color);
+	font-size: 14px;
+	transition: all 0.3s ease;
+}
+
+.mvx-theme-light .mvx-search-input-wrapper input {
+	background: #F3F4F6;
+}
+
+.mvx-search-input-wrapper input:focus {
+	outline: none;
+	border-color: var(--mvx-accent-color);
+	box-shadow: 0 0 10px rgba(35, 243, 210, 0.2);
+}
+
+.mvx-sort-wrapper select {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid var(--mvx-border-color);
+	padding: 12px 24px;
+	border-radius: 30px;
+	color: var(--mvx-text-color);
+	font-size: 14px;
+	cursor: pointer;
+	min-width: 180px;
+	transition: all 0.3s ease;
+}
+
+.mvx-theme-light .mvx-sort-wrapper select {
+	background: #F3F4F6;
+}
+
+.mvx-sort-wrapper select:focus {
+	outline: none;
+	border-color: var(--mvx-accent-color);
+}
+
+/* Dynamic Filter Dropdowns */
+.mvx-nft-filter-row-bottom {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	align-items: center;
+	border-top: 1px solid var(--mvx-border-color);
+	padding-top: 15px;
+}
+
+.mvx-filter-group {
+	position: relative;
+}
+
+.mvx-filter-group-label {
+	font-size: 12px;
+	color: var(--mvx-text-secondary);
+	margin-bottom: 4px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.mvx-filter-select {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid var(--mvx-border-color);
+	padding: 8px 16px;
+	border-radius: 20px;
+	color: var(--mvx-text-color);
+	font-size: 13px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.mvx-filter-select:hover, .mvx-filter-select:focus {
+	border-color: var(--mvx-accent-color);
+	outline: none;
+}
+
+.mvx-filter-clear {
+	background: transparent;
+	border: 1px dashed var(--mvx-border-color);
+	color: var(--mvx-text-secondary);
+	padding: 8px 16px;
+	border-radius: 20px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.mvx-filter-clear:hover {
+	border-color: #EF4444;
+	color: #EF4444;
+}
+
+/* Grid Layout */
+.mvx-nft-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--mvx-grid-columns, 4), 1fr);
+	grid-auto-rows: 10px;
+	grid-gap: 20px;
+	width: 100%;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
+
+/* Card item */
+.mvx-nft-card {
+	background-color: var(--mvx-card-bg);
+	border-radius: var(--mvx-card-radius);
+	overflow: hidden;
+	position: relative;
+	cursor: pointer;
+	transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+	border: 1px solid var(--mvx-border-color);
+	break-inside: avoid;
+	grid-row-end: span 20; /* Default span, recalculated in JS */
+}
+
+.mvx-nft-card-content {
+	display: flex;
+	flex-direction: column;
+	height: auto;
+}
+
+.mvx-nft-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 20px 25px -5px var(--mvx-shadow-color), 0 10px 10px -5px var(--mvx-shadow-color);
+}
+
+.mvx-nft-card:hover .mvx-nft-img {
+	transform: scale(1.06);
+}
+
+.mvx-nft-card:hover .mvx-nft-card-overlay {
+	opacity: 1;
+	background: linear-gradient(to top, rgba(19, 21, 26, 0.95) 0%, rgba(19, 21, 26, 0.4) 60%, rgba(19, 21, 26, 0) 100%);
+}
+
+.mvx-nft-card:hover .mvx-nft-quickview {
+	transform: translate(-50%, -50%) scale(1);
+	opacity: 1;
+}
+
+/* Card Image */
+.mvx-nft-img-wrapper {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.mvx-nft-img {
+	width: 100%;
+	height: auto;
+	display: block;
+	transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+	opacity: 0; /* JS fades in on load */
+}
+
+.mvx-nft-img.loaded {
+	opacity: 1;
+}
+
+/* Card Info Overlay */
+.mvx-nft-card-overlay {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 20px;
+	opacity: 0;
+	transition: opacity 0.3s ease, background 0.3s ease;
+	pointer-events: none;
+	background: linear-gradient(to top, rgba(19, 21, 26, 0.8) 0%, rgba(19, 21, 26, 0) 100%);
+	z-index: 2;
+}
+
+.mvx-nft-title {
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 0 5px 0;
+	color: #FFF;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+	line-height: 1.2;
+}
+
+.mvx-nft-card-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mvx-nft-nonce {
+	font-size: 12px;
+	color: var(--mvx-accent-color);
+	font-weight: 700;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.mvx-nft-rarity-badge {
+	background: var(--mvx-accent-color);
+	color: #000;
+	font-size: 10px;
+	font-weight: 800;
+	padding: 3px 8px;
+	border-radius: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.mvx-nft-quickview {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(0.9);
+	background: rgba(255, 255, 255, 0.9);
+	color: #000;
+	padding: 10px 20px;
+	border-radius: 30px;
+	font-size: 13px;
+	font-weight: 700;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+	opacity: 0;
+	transition: all 0.3s ease;
+	z-index: 3;
+}
+
+.mvx-theme-cyberpunk .mvx-nft-quickview {
+	background: #000;
+	color: var(--mvx-accent-color);
+	border: 1px solid var(--mvx-accent-color);
+}
+
+/* Skeleton Loading Screens */
+.mvx-skeleton-card {
+	background-color: var(--mvx-card-bg);
+	border-radius: var(--mvx-card-radius);
+	border: 1px solid var(--mvx-border-color);
+	overflow: hidden;
+	height: 350px;
+	position: relative;
+}
+
+.mvx-skeleton-card::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 20%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 100%);
+	animation: mvx-shimmer 1.5s infinite;
+}
+
+@keyframes mvx-shimmer {
+	100% { transform: translateX(100%); }
+}
+
+/* Lightbox Modal */
+.mvx-nft-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.mvx-nft-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(10, 11, 15, 0.85);
+	backdrop-filter: blur(8px);
+}
+
+.mvx-nft-modal-content {
+	background: var(--mvx-modal-bg);
+	border: 1px solid var(--mvx-border-color);
+	width: 100%;
+	max-width: 900px;
+	max-height: 90vh;
+	border-radius: calc(var(--mvx-card-radius) + 4px);
+	position: relative;
+	z-index: 10;
+	overflow-y: auto;
+	box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+	animation: mvx-zoomIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes mvx-zoomIn {
+	from { transform: scale(0.95); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+.mvx-nft-modal-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid var(--mvx-border-color);
+	color: #FFF;
+	font-size: 24px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	z-index: 12;
+}
+
+.mvx-nft-modal-close:hover {
+	background: #EF4444;
+	border-color: #EF4444;
+	color: white;
+}
+
+.mvx-nft-modal-body {
+	padding: 40px;
+}
+
+/* Modal details layout */
+.mvx-modal-grid {
+	display: grid;
+	grid-template-columns: 1fr 1.2fr;
+	grid-gap: 40px;
+}
+
+@media(max-width: 768px) {
+	.mvx-modal-grid {
+		grid-template-columns: 1fr;
+		grid-gap: 20px;
+	}
+	.mvx-nft-modal-body {
+		padding: 30px 20px;
+	}
+}
+
+.mvx-modal-media img {
+	width: 100%;
+	height: auto;
+	border-radius: var(--mvx-card-radius);
+	border: 1px solid var(--mvx-border-color);
+	display: block;
+}
+
+.mvx-modal-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.mvx-modal-header {
+	margin-bottom: 20px;
+}
+
+.mvx-modal-title {
+	font-size: 24px;
+	font-weight: 800;
+	margin: 0 0 10px 0;
+	color: var(--mvx-text-color);
+}
+
+.mvx-modal-meta {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+}
+
+.mvx-modal-desc {
+	font-size: 14px;
+	color: var(--mvx-text-secondary);
+	line-height: 1.6;
+	margin-bottom: 25px;
+}
+
+/* Traits Layout in Modal */
+.mvx-modal-traits-title {
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: var(--mvx-text-color);
+	margin: 0 0 15px 0;
+	letter-spacing: 0.05em;
+}
+
+.mvx-modal-traits {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+	margin-bottom: 30px;
+}
+
+@media(max-width: 480px) {
+	.mvx-modal-traits {
+		grid-template-columns: 1fr;
+	}
+}
+
+.mvx-trait-card {
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid var(--mvx-border-color);
+	padding: 12px;
+	border-radius: 10px;
+}
+
+.mvx-theme-light .mvx-trait-card {
+	background: #F3F4F6;
+}
+
+.mvx-trait-type {
+	font-size: 11px;
+	color: var(--mvx-text-secondary);
+	text-transform: uppercase;
+	margin-bottom: 4px;
+	font-weight: 600;
+}
+
+.mvx-trait-value {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--mvx-text-color);
+	margin-bottom: 8px;
+}
+
+.mvx-trait-percentage-bar-wrapper {
+	width: 100%;
+	height: 6px;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.mvx-theme-light .mvx-trait-percentage-bar-wrapper {
+	background: #E5E7EB;
+}
+
+.mvx-trait-percentage-bar {
+	height: 100%;
+	background: var(--mvx-accent-color);
+	border-radius: 3px;
+}
+
+.mvx-trait-freq {
+	font-size: 10px;
+	color: var(--mvx-accent-color);
+	font-weight: 700;
+	margin-top: 4px;
+	text-align: right;
+}
+
+/* Modal Actions Buttons */
+.mvx-modal-actions {
+	display: flex;
+	gap: 10px;
+}
+
+.mvx-btn {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 24px;
+	border-radius: 30px;
+	font-size: 14px;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: 1px solid transparent;
+}
+
+.mvx-btn-primary {
+	background: var(--mvx-accent-color);
+	color: #000;
+}
+
+.mvx-btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 15px -3px rgba(35, 243, 210, 0.3);
+}
+
+.mvx-btn-secondary {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: var(--mvx-border-color);
+	color: var(--mvx-text-color);
+}
+
+.mvx-theme-light .mvx-btn-secondary {
+	background: #FFF;
+	color: #1F2937;
+	border-color: #D1D5DB;
+}
+
+.mvx-btn-secondary:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: var(--mvx-accent-color);
+}
+
+/* No results state */
+.mvx-no-results {
+	text-align: center;
+	padding: 50px 0;
+	color: var(--mvx-text-secondary);
+}
+
+.mvx-no-results p {
+	font-size: 16px;
+	margin-top: 10px;
+}
+
+/* Pagination controls styling */
+.mvx-nft-pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-top: 40px;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.mvx-pagination-info {
+	font-size: 14px;
+	color: var(--mvx-text-secondary);
+	font-weight: 600;
+	user-select: none;
+}
+
+.mvx-btn-prev, .mvx-btn-next {
+	min-width: 130px;
+	transition: all 0.3s ease;
+	background: rgba(255, 255, 255, 0.08) !important;
+	color: var(--mvx-text-color) !important;
+	border: 1px solid var(--mvx-border-color) !important;
+}
+
+.mvx-btn-prev:hover:not(:disabled), .mvx-btn-next:hover:not(:disabled) {
+	background: rgba(255, 255, 255, 0.15) !important;
+	border-color: var(--mvx-accent-color) !important;
+	color: #FFF !important;
+}
+
+.mvx-theme-light .mvx-btn-prev, .mvx-theme-light .mvx-btn-next {
+	background: #FFFFFF !important;
+	color: #1F2937 !important;
+	border-color: #D1D5DB !important;
+}
+
+.mvx-theme-light .mvx-btn-prev:hover:not(:disabled), .mvx-theme-light .mvx-btn-next:hover:not(:disabled) {
+	background: #F3F4F6 !important;
+	border-color: var(--mvx-accent-color) !important;
+	color: #000 !important;
+}
+
+.mvx-btn-prev:disabled, .mvx-btn-next:disabled {
+	opacity: 0.25 !important;
+	cursor: not-allowed !important;
+	transform: none !important;
+	box-shadow: none !important;
+	border-color: var(--mvx-border-color) !important;
+	background: rgba(255, 255, 255, 0.02) !important;
+	color: var(--mvx-text-secondary) !important;
+}
+
+.mvx-theme-light .mvx-btn-prev:disabled, .mvx-theme-light .mvx-btn-next:disabled {
+	background: #E5E7EB !important;
+	color: #9CA3AF !important;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+	.mvx-nft-grid {
+		grid-template-columns: repeat(min(var(--mvx-grid-columns, 4), 3), 1fr);
+	}
+}
+
+@media (max-width: 768px) {
+	.mvx-nft-container {
+		padding: 16px 12px;
+		margin: 10px 0;
+		border-radius: var(--mvx-card-radius);
+	}
+
+	.mvx-nft-grid {
+		grid-template-columns: repeat(min(var(--mvx-grid-columns, 4), 2), 1fr);
+		grid-gap: 12px;
+	}
+
+	/* Card Stacked Info Layout for Mobile */
+	.mvx-nft-card-content {
+		/* Content flows naturally */
+	}
+
+	.mvx-nft-card-overlay {
+		position: relative;
+		opacity: 1 !important;
+		padding: 12px;
+		background: transparent !important;
+		pointer-events: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.mvx-nft-title {
+		font-size: 13px;
+		text-shadow: none;
+		color: var(--mvx-text-color);
+		margin-bottom: 6px;
+		font-weight: 600;
+	}
+
+	.mvx-nft-card-footer {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+
+	.mvx-nft-nonce {
+		font-size: 11px;
+		text-shadow: none;
+		color: var(--mvx-accent-color);
+	}
+
+	.mvx-nft-rarity-badge {
+		font-size: 9px;
+		padding: 2px 6px;
+	}
+
+	.mvx-nft-quickview {
+		display: none !important;
+	}
+
+	/* Theme specifics overrides for mobile card overlay background to ensure readability if card background is transparent */
+	.mvx-theme-light .mvx-nft-title {
+		color: #1F2937;
+	}
+
+	/* Filters & Sorting Mobile Adaptations */
+	.mvx-nft-toggle-wrapper {
+		justify-content: center;
+		width: 100%;
+	}
+
+	.mvx-btn-toggle-filters {
+		width: 100%;
+		justify-content: center;
+		padding: 12px 24px;
+	}
+
+	.mvx-nft-filter-row-top {
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.mvx-search-input-wrapper,
+	.mvx-sort-wrapper {
+		width: 100%;
+		min-width: 100%;
+	}
+
+	.mvx-sort-wrapper select {
+		width: 100%;
+		min-width: 100%;
+	}
+
+	.mvx-nft-filter-row-bottom {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 12px;
+		align-items: flex-end;
+	}
+
+	.mvx-filter-group {
+		width: 100%;
+	}
+
+	.mvx-filter-select {
+		width: 100%;
+	}
+
+	.mvx-filter-clear {
+		grid-column: span 2;
+		width: 100%;
+		margin-top: 5px;
+		text-align: center;
+		justify-content: center;
+	}
+
+	/* Modal spacing and scroll fixes */
+	.mvx-nft-modal {
+		align-items: flex-start;
+		overflow-y: auto;
+		padding: 10px;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.mvx-nft-modal-content {
+		max-height: none;
+		margin: 50px auto 20px auto;
+		overflow-y: visible;
+	}
+
+	.mvx-nft-modal-body {
+		padding: 24px 16px 20px 16px !important;
+	}
+
+	.mvx-nft-modal-close {
+		position: fixed;
+		top: 12px;
+		right: 12px;
+		z-index: 100000;
+		background: rgba(15, 17, 23, 0.85) !important;
+		color: #FFF !important;
+		border: 1px solid rgba(255, 255, 255, 0.2) !important;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(4px);
+		width: 42px;
+		height: 42px;
+		font-size: 24px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.mvx-theme-light .mvx-nft-modal-close {
+		background: rgba(255, 255, 255, 0.9) !important;
+		color: #1F2937 !important;
+		border: 1px solid rgba(0, 0, 0, 0.1) !important;
+	}
+
+	/* Pagination scaling fixes */
+	.mvx-nft-pagination {
+		gap: 8px;
+	}
+
+	.mvx-btn-prev, .mvx-btn-next {
+		min-width: 90px;
+		padding: 10px 12px;
+		font-size: 13px;
+	}
+
+	.mvx-pagination-info {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 480px) {
+	.mvx-nft-grid {
+		/* Keep 2 columns but with even smaller gap to maximize screen usage */
+		grid-gap: 8px;
+	}
+
+	.mvx-nft-container {
+		padding: 12px 8px;
+	}
+
+	.mvx-nft-card-overlay {
+		padding: 8px;
+	}
+
+	.mvx-nft-title {
+		font-size: 12px;
+		margin-bottom: 4px;
+	}
+
+	.mvx-nft-nonce {
+		font-size: 10px;
+	}
+
+	.mvx-nft-rarity-badge {
+		font-size: 8px;
+		padding: 1px 4px;
+	}
+}
+
+/* Video Placeholder and Play Button Overlay in Grid */
+.mvx-nft-video-placeholder {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.3);
+	border-radius: var(--mvx-card-radius);
+	transition: all 0.3s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+	opacity: 0;
+}
+
+.mvx-nft-video-placeholder.loaded {
+	opacity: 1;
+}
+
+.mvx-theme-light .mvx-nft-video-placeholder {
+	background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.mvx-nft-card:hover .mvx-nft-video-placeholder {
+	transform: scale(1.06);
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.12) 100%);
+	color: var(--mvx-accent-color);
+}
+
+.mvx-play-badge {
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgba(0, 0, 0, 0.7);
+	color: var(--mvx-accent-color);
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(4px);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	z-index: 3;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.mvx-play-badge svg {
+	margin-left: 2px;
+}
+
+.mvx-nft-card:hover .mvx-play-badge {
+	background: var(--mvx-accent-color);
+	color: #000;
+	transform: translateX(-50%) scale(1.1);
+	box-shadow: 0 0 12px var(--mvx-accent-color);
+}
