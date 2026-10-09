@@ -24,7 +24,7 @@ class MVX_NFT_Gallery {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 
 		// Register Shortcode
-		add_shortcode( 'mvx_nft_pinterest', array( $this, 'render_shortcode' ) );
+		add_shortcode( 'mvx_nft_gallery', array( $this, 'render_shortcode' ) );
 
 		// Clear cache when settings are updated
 		add_action( 'update_option_mvx_nft_default_collection', array( $this, 'clear_transient_cache' ) );
@@ -327,7 +327,7 @@ class MVX_NFT_Gallery {
 	}
 
 	/**
-	 * Shortcode callback: [mvx_nft_pinterest]
+	 * Shortcode callback: [mvx_nft_gallery]
 	 */
 	public function render_shortcode( $atts ) {
 		$default_collection = get_option( 'mvx_nft_default_collection', '' );
@@ -343,7 +343,7 @@ class MVX_NFT_Gallery {
 				'theme'      => get_option( 'mvx_nft_theme', 'glassmorphism' ),
 			),
 			$atts,
-			'mvx_nft_pinterest'
+			'mvx_nft_gallery'
 		);
 
 		if ( empty( $args['collection'] ) ) {
@@ -589,9 +589,9 @@ class MVX_NFT_Gallery {
 
 			<h2><?php esc_html_e( 'Usage Instructions', 'mvx-nft-pinterest' ); ?></h2>
 			<p><?php esc_html_e( 'To display the gallery on a page or post, paste the following shortcode:', 'mvx-nft-pinterest' ); ?></p>
-			<code>[mvx_nft_pinterest]</code>
+			<code>[mvx_nft_gallery]</code>
 			<p><?php esc_html_e( 'You can override default settings using shortcode attributes:', 'mvx-nft-pinterest' ); ?></p>
-			<code>[mvx_nft_pinterest collection="COLLECTION-123456" limit="50" columns="3" theme="light"]</code>
+			<code>[mvx_nft_gallery collection="COLLECTION-123456" limit="50" columns="3" theme="light"]</code>
 		</div>
 		<?php
 	}
