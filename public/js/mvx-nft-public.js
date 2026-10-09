@@ -511,7 +511,6 @@ class MvxPinterestGallery {
 							` : `
 								<img data-src="${nft.image}" data-fallback="${nft.imageFallback || ''}" class="mvx-nft-img" alt="${nft.name}" />
 							`}
-							<div class="mvx-nft-quickview">Quick View</div>
 						</div>
 						<div class="mvx-nft-card-overlay">
 							<h3 class="mvx-nft-title">${nft.name}</h3>
